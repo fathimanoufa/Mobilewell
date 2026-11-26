@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+API_URL = "https://mobilewell.onrender.com"
 
 st.set_page_config(page_title="MobileWell | Digital Wellness", page_icon="🌿",
                    layout="wide", initial_sidebar_state="collapsed")
@@ -164,7 +165,7 @@ if submitted:
     try:
         # Send user data to FastAPI
         response = requests.post(
-            "http://127.0.0.1:8000/predict",
+            f"{API_URL}/predict",
             json=input_data
         )
 
@@ -284,7 +285,7 @@ st.subheader("📊 Prediction History")
 
 if st.button("View Prediction History"):
     try:
-        response = requests.get("http://127.0.0.1:8000/history")
+        response = requests.get(f"{API_URL}/history")
         response.raise_for_status()
 
         history = response.json()
